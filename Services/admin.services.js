@@ -56,7 +56,9 @@ module.exports = {
     },
     async getRoomsWithBookedData(req, res) {
         try {
-            const data = await mongo.bookings.find({},{projection:{_id:0,price:0,roomId:0}}).toArray();
+            const admin = await mongo.admin.findOne({ _id: mongo.ObjectId(req.id) });
+            if (!admin) return res.status(403).json({ message: "Can only be done by admin" });
+            const data = await mongo.bookings.find({}, { projection: { _id: 0, price: 0, roomId: 0 } }).toArray();
             res.status(200).json(data)
         }
         catch (e) {
@@ -66,7 +68,9 @@ module.exports = {
     },
     async getCustomersWithBookedData(req, res) {
         try {
-            const data = await mongo.bookings.find({},{projection:{_id:0,roomId:0,bookedStatus:0,price:0}}).toArray();
+            const admin = await mongo.admin.findOne({ _id: mongo.ObjectId(req.id) });
+            if (!admin) return res.status(403).json({ message: "Can only be done by admin" });
+            const data = await mongo.bookings.find({}, { projection: { _id: 0, roomId: 0, bookedStatus: 0, price: 0 } }).toArray();
             res.status(200).json(data)
         }
         catch (e) {
