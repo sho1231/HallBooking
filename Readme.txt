@@ -30,14 +30,36 @@ sample req body:{
 }
 
 //To add a room(can only be done by admin)
-path:
-method:
-sample req body
+path:/admin/createRoom
+method:POST
+sample req body:{
+	"roomName":"B4",
+	"numberOfSeats":250,
+	"amenties":["Dining Table","Decorations"],
+	"price":131
+}
 
 
 //to book a room(Can be done by customer)
-path:
-method:
-sample req body
+path:/users/book
+method:POST
+sample req body:{
+	"date":"10/23/2022",
+	"stime":"1:23pm",
+	"etime":"8:45pm",
+	"roomId":"633f2ab8562c4245549e2f73"
+}
+
+
 
 //to get rooms with booked data(can only be done by admin)
+path:/admin/roomsBookedData
+method:GET
+
+
+//to get customers with booked data(can only be done by admin)
+path:/admin/customersBookedData
+method:get
+
+
+
